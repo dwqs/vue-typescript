@@ -1,17 +1,21 @@
-// import './reset.css';
+import './reset.css';
 
 import Vue from 'vue';
 import Router from 'vue-router';
-// import { sync } from 'vuex-router-sync';
+import { sync } from 'vuex-router-sync';
 
 const env = process.env.NODE_ENV || 'development';
+
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
 if (env !== 'development') {
     Vue.config.devtools = false;
     Vue.config.productionTip = false;
 }
 
-// import store from '../store/index';
+import store from '../store/index';
+
+console.log('store', store);
 
 Vue.use(Router);
 
@@ -37,11 +41,11 @@ const router = new Router({
     ],
 });
 
-// sync(store, router);
+sync(store, router);
 
 const app = new Vue({
     router,
-    // store,
+    store,
     ...Outer,
 });
 

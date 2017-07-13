@@ -42,6 +42,12 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
         filename: "[name].[contenthash:8].css"
     }),
 
+    new webpack.DefinePlugin({
+        "process.env": {
+            NODE_ENV: JSON.stringify(config.build.env)
+        }
+    }),
+
     new HappyPack(getHappyPackConfig({
         id: 'less-prod',
         loaders: ['css-loader', {

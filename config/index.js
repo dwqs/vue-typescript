@@ -7,12 +7,14 @@ module.exports =  {
         assetsRoot: path.resolve(__dirname, '../dist'),
         assetsPublicPath: '/',
         contentBase: path.resolve(__dirname, '../dist'),
-        port: 3000
+        port: 3000,
+        env: 'development'
     },
     build:{
         assetsRoot: path.resolve(__dirname, '../dist'),
         assetsPublicPath: '/',
-        contentBase: path.resolve(__dirname, '../dist')
+        contentBase: path.resolve(__dirname, '../dist'),
+        env: 'production'
     },
     prefix: {
         development: '',

@@ -19,7 +19,8 @@
     "max-classes-per-file": [true, 5],
     "no-unused-variable": true,
     "quotemark": [true, "single", "avoid-escape"],
-    "object-literal-sort-keys":false
+    "object-literal-sort-keys":false,
+    "ordered-imports": ["any"]
   },
   "jsRules": {
     "max-line-length": [true, 120],
