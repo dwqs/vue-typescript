@@ -6,8 +6,6 @@ import { sync } from 'vuex-router-sync';
 
 const env = process.env.NODE_ENV || 'development';
 
-console.log('process.env.NODE_ENV', process.env.NODE_ENV);
-
 if (env !== 'development') {
     Vue.config.devtools = false;
     Vue.config.productionTip = false;
