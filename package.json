@@ -21,7 +21,7 @@
     "vuex": "^2.3.1",
     "vuex-router-sync": "^4.2.0",
     "vue-class-component": "^5.0.2",
-    "vue-property-decorators": "^5.1.1",
+    "vue-property-decorator": "^5.1.1",
     "vuex-class": "^0.2.0"
   },
   "devDependencies": {
