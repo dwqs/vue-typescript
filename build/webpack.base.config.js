@@ -5,6 +5,7 @@ let webpack = require('webpack');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 let HappyPack = require('happypack'); 
+let ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 let getHappyPackConfig = require('./happypack');
 
@@ -24,15 +25,15 @@ module.exports = {
         noParse: [/static|assets/],
         rules: [
             {
+                test: /\.tsx?$/,
+                exclude: /node_modules|vue\/src/,
+                use: ['happypack/loader?id=ts']
+            },
+            {
                 test: /\.vue$/,
                 use: [{
                     loader: 'happypack/loader?id=vue'
                 }]
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: ['happypack/loader?id=js']
             },
             {
                 test: /\.(png|jpg|gif|jpeg)$/,
@@ -58,7 +59,7 @@ module.exports = {
     },
 
     resolve:{
-        extensions:[".vue",".js"],
+        extensions:[".ts",".tsx",".js"],
         modules: [path.join(__dirname, '../node_modules')],
         alias:{
             '@src': path.resolve(__dirname, '../src'),
@@ -98,8 +99,16 @@ module.exports = {
         })),
 
         new HappyPack(getHappyPackConfig({
-            id: 'js',
-            loaders: ['babel-loader']
+            id: 'ts',
+            loaders: [{
+                path: 'ts-loader',
+                query: { happyPackMode: true },
+                options: {
+                    appendTsSuffixTo: [/\.vue$/],
+                    // disable type checker - we will use it in fork plugin
+                    transpileOnly: true
+                }
+            }]
         })),
 
 
@@ -114,6 +123,8 @@ module.exports = {
                 collapseWhitespace: true,
                 removeAttributeQuotes: false
           }
-        })
+        }),
+
+        new ForkTsCheckerWebpackPlugin()
     ]
 };
