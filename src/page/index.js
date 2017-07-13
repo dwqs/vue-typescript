@@ -1,5 +1,4 @@
 import './reset.css';
-import 'babel-polyfill';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -29,7 +28,6 @@ const router = new VueRouter({
             path: '/',
             component: Outer,
             children: [
-                // 嵌套路由 https://github.com/vuejs/vue-router/blob/next-doc/docs/en/advanced-routing/nested.md
                 { path: '', component: App },
                 { path: 'info', component: Info }
             ]
