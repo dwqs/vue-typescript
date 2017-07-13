@@ -38,10 +38,6 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
         dry: false
     }),
 
-    new webpack.DefinePlugin({
-        'process.env': config.build.env
-    }),
-
     new ExtractTextPlugin({
         filename: "[name].[contenthash:8].css"
     }),
@@ -50,7 +46,7 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
         id: 'less-prod',
         loaders: ['css-loader', {
             path: 'postcss-loader',
-            options: {
+            query: {
                 sourceMap: "inline"
             }
         }, 'less-loader']
@@ -60,7 +56,7 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
         id: 'css-prod',
         loaders: ['css-loader', {
             path: 'postcss-loader',
-            options: {
+            query: {
                 sourceMap: "inline"
             }
         }]
@@ -130,7 +126,7 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
 
 module.exports = Object.assign({},prodConfig,{
     entry: {
-        app: path.resolve(__dirname, '../src/page/index.js')
+        app: path.resolve(__dirname, '../src/page/index.ts')
     },
     output: {
         filename: "[name].[chunkhash:8].js",

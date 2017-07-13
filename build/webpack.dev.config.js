@@ -22,10 +22,6 @@ devConfig.module.rules.unshift({
 devConfig.plugins = (devConfig.plugins || []).concat([
     new webpack.HotModuleReplacementPlugin(),
 
-    new webpack.DefinePlugin({
-        'process.env': config.dev.env
-    }),
-
     new HappyPack(getHappyPackConfig({
         id: 'less-dev',
         loaders: ['vue-style-loader','css-loader', 'postcss-loader', 'less-loader']
@@ -76,7 +72,7 @@ module.exports = Object.assign({},devConfig,{
         app:[
             'webpack/hot/dev-server',
             `webpack-dev-server/client?http://localhost:${config.dev.port}/`,
-            path.resolve(__dirname, '../src/page/index.js')
+            path.resolve(__dirname, '../src/page/index.ts')
         ]
     },
     output: {

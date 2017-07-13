@@ -26,8 +26,14 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                exclude: /node_modules|vue\/src/,
-                use: ['happypack/loader?id=ts']
+                exclude: /node_modules/,
+                use: [{
+                    loader: 'ts-loader',
+                    options: {
+                        appendTsSuffixTo: [/\.vue$/],
+                        transpileOnly: true
+                    }
+                }]
             },
             {
                 test: /\.vue$/,
@@ -59,7 +65,7 @@ module.exports = {
     },
 
     resolve:{
-        extensions:[".ts",".tsx",".js"],
+        extensions:[".ts",".tsx", ".js"],
         modules: [path.join(__dirname, '../node_modules')],
         alias:{
             '@src': path.resolve(__dirname, '../src'),
@@ -90,27 +96,13 @@ module.exports = {
         new HappyPack(getHappyPackConfig({
             id: 'vue',
             loaders: [{
-                loader: 'vue-loader',
-                options: {
+                path: 'vue-loader',
+                query: {
                     // https://github.com/vuejs/vue-loader/issues/863
-                    esModule: false
+                    esModule: true
                 }
             }]
         })),
-
-        new HappyPack(getHappyPackConfig({
-            id: 'ts',
-            loaders: [{
-                path: 'ts-loader',
-                query: { happyPackMode: true },
-                options: {
-                    appendTsSuffixTo: [/\.vue$/],
-                    // disable type checker - we will use it in fork plugin
-                    transpileOnly: true
-                }
-            }]
-        })),
-
 
         // https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
@@ -125,6 +117,8 @@ module.exports = {
           }
         }),
 
-        new ForkTsCheckerWebpackPlugin()
+        new ForkTsCheckerWebpackPlugin({
+            tsconfig: '../tsconfig.json'
+        })
     ]
 };
