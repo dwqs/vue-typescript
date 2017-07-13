@@ -75,7 +75,10 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
     }),
 
     new webpack.optimize.CommonsChunkPlugin({
-        name: "vendor"
+        name: "vendor",
+        minChunks: ({resource}) => {
+            return resource && resource.indexOf('node_modules') >= 0 && resource.match(/\.js$/);
+        }
     }),
 
     // gzip
@@ -127,8 +130,7 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
 
 module.exports = Object.assign({},prodConfig,{
     entry: {
-        app: path.resolve(__dirname, '../src/page/index.js'),
-        vendor: ['vue', 'vuex', 'vue-router', 'vuex-router-sync']
+        app: path.resolve(__dirname, '../src/page/index.js')
     },
     output: {
         filename: "[name].[chunkhash:8].js",
