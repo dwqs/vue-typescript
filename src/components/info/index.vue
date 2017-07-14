@@ -14,7 +14,7 @@
 
     @Component
     export default class Info extends Vue {
-        name: string =  'info';
+        name: string = 'info';
         info: string = 'project info:';
 
         beforeRouteEnter (to, from, next) {
