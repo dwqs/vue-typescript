@@ -5,16 +5,16 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import './hello.less';
 
-    export default {
-        name: 'hello',
-        data () {
-            return {
-                desc: 'A simple template webpack + vuejs setup for projects'
-            };
-        }
+    import Vue from 'vue';
+    import Component from 'vue-class-component';
+
+    @Component
+    export default class Hello extends Vue {
+        name: string = 'hello';
+        desc: string = 'A simple template webpack 3 + vuejs 2 + typescript 2 setup for projects';
     };
 </script>
 
