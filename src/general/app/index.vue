@@ -32,11 +32,26 @@
 
         components: {
             Hello
+        },
+
+        props: {
+            testProps: {
+                type: String,
+                default: 'testProps'
+            }
+        },
+
+        watch: {
+            userName(oldVal, newVal) {
+                console.log('username changed: ', oldVal, newVal);
+            }
         }
     })
     export default class App extends Vue {
-        title: string = 'vuejs 2 + webpack 2';
+        // data
+        title: string = `vuejs 2 + webpack 2 + ${this.testProps}`;
 
+        // computed
         get computedTitle(){
             return this.title + ' computed';
         }
@@ -45,12 +60,13 @@
             return this.computedTitle + ' info';
         }
 
+        // hooks
         created(){
-            console.log('111', this.userName)
+            console.log('created', this.userName)
         }
 
+        // methods
         showUserInfo() {
-            console.log('show user info');
             this.title = '22222';
         }
     }
