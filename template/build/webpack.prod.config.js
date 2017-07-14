@@ -10,7 +10,9 @@ let WebpackMd5Hash = require('webpack-md5-hash');
 let os = require('os');
 let CompressionPlugin = require("compression-webpack-plugin");
 let HappyPack = require('happypack');  
+{{#imageminifying}}
 let ImageminPlugin = require('imagemin-webpack-plugin').default;
+{{/imageminifying}}}}
 
 let getHappyPackConfig = require('./happypack');
 
@@ -32,7 +34,7 @@ prodConfig.module.rules.unshift({
 });
 
 prodConfig.plugins = (prodConfig.plugins || []).concat([
-    new CleanWebpackPlugin(['dist'], {
+    new CleanWebpackPlugin(['{{path}}'], {
         root: path.join(__dirname, '../'),
         verbose: true,
         dry: false
@@ -107,6 +109,7 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
         }
     }),
 
+    {{#imageminifying}}
     // image minifying
     new ImageminPlugin({ 
         test: path.resolve(__dirname, '../dist/assets'),
@@ -125,6 +128,7 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
             speed: 3
         }
     }),
+    {{/imageminifying}}
     
     new webpack.optimize.ModuleConcatenationPlugin(),
     new WebpackMd5Hash()

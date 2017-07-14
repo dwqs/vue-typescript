@@ -4,22 +4,22 @@ let path = require('path');
 
 module.exports =  {
     dev:{
-        assetsRoot: path.resolve(__dirname, '../dist'),
+        assetsRoot: path.resolve(__dirname, '../{{path}}'),
         assetsPublicPath: '/',
-        contentBase: path.resolve(__dirname, '../dist'),
-        port: 3000,
+        contentBase: path.resolve(__dirname, '../{{path}}'),
+        port: {{port}},
         env: 'development'
     },
     build:{
-        assetsRoot: path.resolve(__dirname, '../dist'),
+        assetsRoot: path.resolve(__dirname, '../{{path}}'),
         assetsPublicPath: '/',
-        contentBase: path.resolve(__dirname, '../dist'),
+        contentBase: path.resolve(__dirname, '../{{path}}'),
         env: 'production'
     },
     prefix: {
-        development: '',
-        staging: '',
-        preview: '',
-        production: ''
+        development: '{{prefix}}',
+        staging: '{{prefix}}',
+        preview: '{{prefix}}',
+        production: '{{prefix}}'
     }
 }
