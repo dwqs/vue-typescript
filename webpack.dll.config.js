@@ -7,7 +7,7 @@ module.exports = {
     entry: {
         vendor: [
             'vue', 'vuex', 'vue-router', 'vuex-router-sync',
-            'vue-class-component', 'vue-property-decorator', 'vuex-class'
+            'vue-class-component', 'vue-property-decorator'
         ]
     },
     output: {
