@@ -1,12 +1,17 @@
 <template>
     <div id="app2">
-        <h3>{{title}} -- {{computedTitle}} == {{computedInfo}}</h3>
+        <h3>{{title}}</h3>
         <hello />
         <p class="doc">
             Documentation can be found atx2:
-            <a href="https://github.com/dwqs/vue-startup" target="_blank">vue-startup</a>
+            <a href="https://github.com/fmfe/vue-typescript" target="_blank">vue-typescript</a>
         </p>
-        <button @click="changeUserName('1111')">查看用户信息:</button>{{userName}}
+          <span>sda</span>
+        <div>
+            <button @click="changeUserName('2222')">更改用户信息:</button>
+            <span>用户信息: {{userName}}</span>
+        </div>
+        <br/><br/>
         <router-link to="/info">查看项目信息</router-link>
     </div>
 </template>
@@ -37,36 +42,36 @@
         props: {
             testProps: {
                 type: String,
-                default: 'testProps'
+                default: 'TypeScript 2'
             }
         },
 
         watch: {
-            userName(oldVal, newVal) {
+            userName (oldVal, newVal) {
                 console.log('username changed: ', oldVal, newVal);
             }
         }
     })
     export default class App extends Vue {
         // data
-        title: string = `vuejs 2 + webpack 2 + ${this.testProps}`;
+        title: string = `Vuejs 2 + Webpack 3 + ${this.testProps}`;
 
         // computed
-        get computedTitle(){
+        get computedTitle () {
             return this.title + ' computed';
         }
 
-        get computedInfo(){
+        get computedInfo () {
             return this.computedTitle + ' info';
         }
 
         // hooks
-        created(){
-            console.log('created', this.userName)
+        created () {
+            console.log('created', this.userName);
         }
 
         // methods
-        showUserInfo() {
+        showUserInfo () {
             this.title = '22222';
         }
     }
