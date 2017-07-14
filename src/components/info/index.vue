@@ -8,15 +8,20 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'info',
-    data () {
-        return {
-            info: 'project info:'
-        };
-    }
-};
+<script lang="ts">
+    import Vue from 'vue';
+    import Component from 'vue-class-component';
+
+    @Component
+    export default class Info extends Vue {
+        name: string =  'info';
+        info: string = 'project info:';
+
+        beforeRouteEnter (to, from, next) {
+            console.log('666666');
+            next();
+        }
+    };
 </script>
 
 <style></style>

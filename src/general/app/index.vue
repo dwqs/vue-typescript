@@ -6,7 +6,6 @@
             Documentation can be found atx2:
             <a href="https://github.com/fmfe/vue-typescript" target="_blank">vue-typescript</a>
         </p>
-          <span>sda</span>
         <div>
             <button @click="changeUserName('2222')">更改用户信息:</button>
             <span>用户信息: {{userName}}</span>

@@ -1,3 +1,4 @@
+import './hooks';
 import './reset.css';
 
 import Vue from 'vue';
