@@ -6,8 +6,7 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         vendor: [
-            'vue', 'vuex', 'vue-router', 'vuex-router-sync',
-            'vue-class-component', 'vue-property-decorator'
+            'vue', 'vuex', 'vue-router', 'vuex-router-sync', 'vue-class-component'
         ]
     },
     output: {
