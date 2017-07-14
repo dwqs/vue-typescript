@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import Component from 'vue-class-component';
 
 // https://github.com/vuejs/vue-class-component#adding-custom-hooks
