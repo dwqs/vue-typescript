@@ -12,7 +12,7 @@ let CompressionPlugin = require("compression-webpack-plugin");
 let HappyPack = require('happypack');  
 {{#imageminifying}}
 let ImageminPlugin = require('imagemin-webpack-plugin').default;
-{{/imageminifying}}}}
+{{/imageminifying}}
 
 let getHappyPackConfig = require('./happypack');
 
