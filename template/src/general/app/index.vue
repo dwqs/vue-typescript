@@ -1,6 +1,6 @@
 <template>
     <div id="app2">
-        <h3>{{title}}</h3>
+        <h3>\{{title}}</h3>
         <hello />
         <p class="doc">
             Documentation can be found atx2:
@@ -11,7 +11,7 @@
             <span>用户信息: {{userName}}</span>
         </div>
         <br/><br/>
-        <router-link to="/info">查看项目信息</router-link>
+        <router-link to="{{publicPath}}info">查看项目信息</router-link>
     </div>
 </template>
 

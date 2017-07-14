@@ -15,7 +15,7 @@ module.exports = {
           "type"    : "string",
           "required": false,
           "message" : "Project description",
-          "default" : "A new Vue.js project"
+          "default" : "A new Vue.js + TypeScript project"
       },
       "author": {
           "type"   : "string",

@@ -14,15 +14,11 @@ if (env !== 'development') {
 
 import store from '../store/index';
 
-console.log('store', store);
-
 Vue.use(Router);
 
 // dynamic import for on-demand loaded chunk
 const App = (r: any) => require.ensure([], () => r(require('../general/app/index.vue')), 'app1');
 const Info = (r: any) => require.ensure([], () => r(require('@components/info/index.vue')), 'info');
-
-// import App from '../general/app/index.vue';
 
 const Outer = { template: '<router-view></router-view>' };
 
@@ -30,7 +26,7 @@ const router = new Router({
     mode: 'history',
     routes: [
         {
-            path: '/',
+            path: '{{publicPath}}',
             component: Outer,
             children: [
                 { path: '', component: App },

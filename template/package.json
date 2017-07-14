@@ -1,8 +1,8 @@
 {
-  "name": "vue-typescript",
-  "version": "0.0.1",
-  "description": "A new Vue.js project",
-  "author": "dwqs",
+  "name": "{{name}}",
+  "version": "{{version}}",
+  "description": "{{description}}",
+  "author": "{{author}}",
   "license": "MIT",
   "scripts": {
     "prepush": "npm run ilint -q",
