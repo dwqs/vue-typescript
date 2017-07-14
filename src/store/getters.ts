@@ -2,6 +2,7 @@
 
 export default {
     getterTest(state: any) {
-        console.log('11111---getters');
+        console.log('11111---getters', state);
+        return state;
     },
 } 
