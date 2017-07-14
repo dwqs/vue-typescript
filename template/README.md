@@ -18,8 +18,8 @@
 
 ## 其它脚本
 
-* `npm run ilint`: eslint 检查, 会根据 .eslintrc 的配置去检查 `src` 目录下的 `.vue` 和 `.js` 文件. 项目中加入了 `pre-push hooks`, 每次 `push` 之前都会自动运行该脚本. 可以参考 [doc](http://eslint.org/docs/rules/) 自定义配置.
-* `npm run fix`: eslint 自动修复
+* `npm run ilint`: tslint & eslint 检查, 会根据 `.eslintrc.json` 的配置去检查 `src` 目录下的 `.vue` 和 `.js` 文件. 项目中加入了 `pre-push hooks`, 每次 `push` 之前都会自动运行该脚本. 可以参考 [doc](http://eslint.org/docs/rules/) 自定义配置.
+* `npm run fix`: tslint & eslint 自动修复
 * `npm run build:stag`: 开发环境 build
 * `npm run build:preview`:预发环境 build
 * `npm run build:prod`: 生产环境 build
@@ -29,7 +29,7 @@
 项目目录结构如下:
 
 ```
-|——vue-startup
+|——vue-typescript
   |——build                  // 构建脚本
   |——config                 // 构建环境配置文件
   |——src                    // 项目源码
@@ -39,9 +39,12 @@
     |——lib                  // 公共库
     |——network              // 网络请求
     |——page                 // 项目入口
+    |--typings              // 类型声明
     |——store                // store 入口
     |——index.html           // 挂载的静态文件
-  |——.eslintrc              // eslint 配置
+  |——.eslintrc.json         // eslint 配置
+  |--tslint.json            // tslint 配置
+  |--tsconfig.json          // typescript 编译配置
   |——.babelrc               // babel 配置
   |——.npmrc                 // npm 配置
   |——package.json           // 项目依赖
