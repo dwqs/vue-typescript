@@ -12,6 +12,13 @@ let getHappyPackConfig = require('./happypack');
 
 let config = require('../config');
 
+{{#fmcomponents}}
+let include = [
+    path.resolve(__dirname, '../src/'),
+    path.resolve(__dirname, '../node_modules/fmcomponents/src/')
+];
+{{/fmcomponents}}
+
 const env = process.env.NODE_ENV || 'development';
 
 // 全局变量
@@ -40,6 +47,9 @@ module.exports = {
             },
             {
                 test: /\.vue$/,
+                {{#fmcomponents}}
+                include: include,
+                {{/fmcomponents}}
                 use: [{
                     loader: 'happypack/loader?id=vue'
                 }]
