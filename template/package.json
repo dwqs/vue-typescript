@@ -52,6 +52,7 @@
     "less-loader": "^4.0.4",
     "open-browser-webpack-plugin": "^0.0.5",
     "optimize-css-assets-webpack-plugin": "^2.0.0",
+    "mx-webpack-content-replace-plugin": "^1.0.4",
     {{#imageminifying}}
     "imagemin-webpack-plugin": "^1.5.0-beta.0",
     {{/imageminifying}}
