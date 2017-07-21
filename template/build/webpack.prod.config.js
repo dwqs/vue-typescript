@@ -75,8 +75,7 @@ prodConfig.plugins = (prodConfig.plugins || []).concat([
     new OptimizeCSSPlugin({
         cssProcessorOptions: {
             safe: true
-        },
-        assetNameRegExp: /\.less$/g
+        }
     }),
 
     new webpack.optimize.CommonsChunkPlugin({
