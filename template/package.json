@@ -15,7 +15,7 @@
     "fix": "./node_modules/.bin/tslint -p ./tsconfig.json --type-check --fix src/**/*.ts && ./node_modules/.bin/eslint --fix src/**/*.vue"
   },
   "dependencies": {
-    "babel-runtime": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
     "vue": "^2.4.1",
     {{#fmcomponents}}
     "fmcomponents": "git+ssh://gitlab@fmgit.chinacloudapp.cn/Frontend/fmcomponents.git",
