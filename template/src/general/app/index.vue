@@ -3,8 +3,8 @@
         <h3>\{{title}}</h3>
         <hello />
         <p class="doc">
-            Documentation can be found atx2:
-            <a href="https://github.com/fmfe/vue-typescript" target="_blank">vue-typescript</a>
+            Documentation can be found at:
+            <a href="https://github.com/dwqs/vue-typescript" target="_blank">vue-typescript</a>
         </p>
         <div>
             <button @click="changeUserName('2222')">更改用户信息:</button>
