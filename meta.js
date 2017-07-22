@@ -39,10 +39,6 @@ module.exports = {
           "message" : "Webpack dev server's publicPath, starts with '/' and ends with '/'",
           "default" : "/"
       },
-      "fmcomponents": {
-          "type": "confirm",
-          "message": "Need fmcomponents?"
-       },
       "jquery": {
           "type": "confirm",
           "message": "Need jQuery(2.1.0, auto import by cdn)?"
@@ -52,5 +48,5 @@ module.exports = {
           "message": "Need image minifying in production?"
       }
   },
-  "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dll\n  npm run dev\n\nDocumentation can be found at https://github.com/fmfe/vue-typescript"
+  "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dll\n  npm run dev\n\nDocumentation can be found at https://github.com/dwqs/vue-typescript"
 }
