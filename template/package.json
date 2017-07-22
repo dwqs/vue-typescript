@@ -6,20 +6,15 @@
   "license": "MIT",
   "scripts": {
     "prepush": "npm run ilint -q",
-    "dll": "./node_modules/.bin/webpack --config webpack.dll.config.js",
-    "dev": "./node_modules/.bin/cross-env NODE_ENV=development node ./build/dev-server.js",
-    "build:stag": "./node_modules/.bin/cross-env NODE_ENV=staging ./node_modules/.bin/webpack --config ./build/webpack.prod.config.js --progress --hide-modules",
-    "build:pre": "./node_modules/.bin/cross-env NODE_ENV=preview ./node_modules/.bin/webpack --config ./build/webpack.prod.config.js --progress --hide-modules",
-    "build:prod": "./node_modules/.bin/cross-env NODE_ENV=production ./node_modules/.bin/webpack --config ./build/webpack.prod.config.js --progress --hide-modules",
-    "ilint": "./node_modules/.bin/tslint -p ./tsconfig.json --type-check src/**/*.ts && ./node_modules/.bin/eslint src/**/*.vue",
-    "fix": "./node_modules/.bin/tslint -p ./tsconfig.json --type-check --fix src/**/*.ts && ./node_modules/.bin/eslint --fix src/**/*.vue"
+    "dll": "npx webpack --config webpack.dll.config.js",
+    "dev": "npx cross-env NODE_ENV=development node ./build/dev-server.js",
+    "build": "npx cross-env NODE_ENV=production npx webpack --config ./build/webpack.prod.config.js --progress --hide-modules",
+    "ilint": "npx tslint -p ./tsconfig.json --type-check src/**/*.ts && npx eslint src/**/*.vue",
+    "fix": "npx tslint -p ./tsconfig.json --type-check --fix src/**/*.ts && npx eslint --fix src/**/*.vue"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "vue": "^2.4.1",
-    {{#fmcomponents}}
-    "fmcomponents": "git+ssh://gitlab@fmgit.chinacloudapp.cn/Frontend/fmcomponents.git",
-    {{/fmcomponents}}
     "vue-class-component": "^5.0.2",
     "vue-router": "^2.7.0",
     "vuex": "^2.3.1",
@@ -55,7 +50,6 @@
     "less-loader": "^4.0.4",
     "open-browser-webpack-plugin": "^0.0.5",
     "optimize-css-assets-webpack-plugin": "^2.0.0",
-    "mx-webpack-content-replace-plugin": "^1.0.4",
     {{#imageminifying}}
     "imagemin-webpack-plugin": "^1.5.0-beta.0",
     {{/imageminifying}}
@@ -77,6 +71,6 @@
   },
   "engines": {
     "node": ">= 6.0.0",
-    "npm": ">= 4.0.0"
+    "npm": ">= 5.2.0"
   }
 }
