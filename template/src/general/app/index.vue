@@ -8,7 +8,7 @@
         </p>
         <div>
             <button @click="changeUserName('2222')">更改用户信息:</button>
-            <span>用户信息: {{userName}}</span>
+            <span>用户信息: \{{userName}}</span>
         </div>
         <br/><br/>
         <router-link to="{{publicPath}}info">查看项目信息</router-link>
