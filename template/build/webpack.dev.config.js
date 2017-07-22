@@ -3,7 +3,7 @@
 let path = require('path');
 let webpack = require('webpack');
 let OpenBrowserPlugin = require('open-browser-webpack-plugin');
-let HappyPack = require('happypack');   //loader 多进程处理
+let HappyPack = require('happypack');   
 
 let getHappyPackConfig = require('./happypack');
 
@@ -28,9 +28,7 @@ devConfig.plugins = (devConfig.plugins || []).concat([
     })),
 
     new webpack.DefinePlugin({
-        "process.env": {
-            NODE_ENV: JSON.stringify(config.dev.env)
-        }
+        "process.env": JSON.stringify(config.dev.env)
     }),
 
     new HappyPack(getHappyPackConfig({
