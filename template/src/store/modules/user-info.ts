@@ -1,6 +1,8 @@
 'use strict';
 
 import { ActionContext } from 'vuex';
+import awaitTo from 'async-await-error-handling';
+
 import * as CONSTANT from '../mutation-types';
 
 interface UserState {
@@ -29,19 +31,28 @@ const actions = {
 
     async changeUserName({commit}: ActionContext<UserState, any>, payload: any): Promise<any> {
         console.log('changeUserName', payload)
-        const res = await Promise.resolve(22222);
+        const [err, data] = await awaitTo(Promise.resolve(22222));
+        if(err){
+            commit({
+                type: CONSTANT.CHANGE_USER_NAME,
+                name: null,
+            });
+            return;
+        }
         commit({
             type: CONSTANT.CHANGE_USER_NAME,
-            name: res,
+            name: data,
         });
-        return res;
+        return data;
     },
 };
 
 const mutations = {
     [CONSTANT.CHANGE_USER_NAME](state: UserState, payload: any): any {
         console.log('CONSTANT.CHANGE_USER_NAME', payload);
-        state.name = payload.name;
+        if(payload.name){
+            state.name = payload.name;
+        }
     },
 };
 
