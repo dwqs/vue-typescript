@@ -6,7 +6,8 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         vendor: [
-            'vue', 'vuex', 'vue-router', 'vuex-router-sync', 'vue-class-component', 'babel-polyfill'
+            'vue', 'vuex', 'vue-router', 'vuex-router-sync', 'vue-class-component', 'babel-polyfill',
+            'async-await-error-handling'
         ]
     },
     output: {
