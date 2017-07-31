@@ -1,24 +1,21 @@
 import {observable, action} from 'mobx';
 
 import awaitTo from 'async-await-error-handling';
+import api from '../network/api';
 
 class Time {
     @observable
     public curTime: number = 0;
 
-    constructor(time: number){
-        this.curTime = time;
+    constructor(t: number){
+        this.curTime = t;
     }
 
     @action
     public async changeTime(): Promise<any> {
-        const [err, data] = await awaitTo(new Promise((resolve, reject) => {
-            setTimeout( () => {
-                resolve('async changeTime');
-            }, 10)
-        }));
+        const [err, data] = await awaitTo(api.getIndex());
         console.log('tima model, changeTime', data);
-        if(!data){
+        if(!data) {
             return Promise.reject(err);
         }
         // another way to use async/await: https://github.com/mobxjs/mobx/issues/299
@@ -27,7 +24,7 @@ class Time {
     }
 
     @action
-    public timeChange(): void{
+    public timeChange(): void {
         this.curTime = Date.now();
     }
 }

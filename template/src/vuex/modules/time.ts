@@ -3,6 +3,7 @@
 import { ActionContext } from 'vuex';
 import awaitTo from 'async-await-error-handling';
 
+import api from '../../network/api';
 import * as CONSTANT from '../mutation-types';
 
 interface TimeState {
@@ -21,7 +22,7 @@ const getters = {
 
 const actions = {
     async changeTime({commit}: ActionContext<TimeState, any>, payload: any):  Promise<any>{
-        const [err, data] =  await awaitTo(Promise.resolve('test change time'));
+        const [err, data] =  await awaitTo(api.getIndex());
         console.log('changeTime', data);
 
         if(err){
