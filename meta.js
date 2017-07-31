@@ -21,6 +21,22 @@ module.exports = {
           "message" : "Project description",
           "default" : "A new Vue.js + TypeScript project"
       },
+      "state": {
+           "type": "list",
+           "message": "state manage for your app",
+           "choices": [
+               {
+                   "name": "Mobx (https://github.com/mobxjs/mobx)",
+                   "value": "mobx",
+                   "short": "mobx"
+               },
+               {
+                   "name": "Vuex (https://github.com/vuejs/vuex)",
+                   "value": "vuex",
+                   "short": "vuex"
+               }
+           ]
+      },
       "port": {
           "type"    : "string",
           "required": false,
@@ -31,6 +47,10 @@ module.exports = {
           "type": "confirm",
           "message": "Need image minifying in production?"
       }
+  },
+  "filters": {
+     "src/vuex/**/*": "state === 'vuex'",
+     "src/mobx/**/*": "state === 'mobx'"
   },
   "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dll\n  npm run dev\n\nDocumentation can be found at https://github.com/dwqs/vue-typescript"
 }
