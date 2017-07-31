@@ -11,7 +11,7 @@
             <span>用户信息: \{{userName}}</span>
         </div>
         <br/><br/>
-        <router-link to="{{publicPath}}info">查看项目信息</router-link>
+        <router-link to="/info">查看项目信息</router-link>
     </div>
 </template>
 

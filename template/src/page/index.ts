@@ -27,7 +27,7 @@ const router = new Router({
     mode: 'history',
     routes: [
         {
-            path: '{{publicPath}}',
+            path: '/',
             component: Outer,
             children: [
                 { path: '', component: App },
