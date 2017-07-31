@@ -3,12 +3,20 @@
 const path = require('path');
 const webpack = require('webpack');
 
+{{#if_eq state 'vuex'}}
+let vendors = [
+    'vuex', 'vuex-router-sync'
+];
+{{/if_eq}}
+{{#if_eq state 'mobx'}}
+let vendors = [
+    'mobx', 'vue-mobx'
+];
+{{/if_eq}}
+
 module.exports = {
     entry: {
-        vendor: [
-            'vue', 'vuex', 'vue-router', 'vuex-router-sync', 'vue-class-component', 'babel-polyfill',
-            'async-await-error-handling'
-        ]
+        vendor: vendors.concat('vue', 'vue-class-component', 'vue-router', 'babel-polyfill', 'async-await-error-handling')
     },
     output: {
         path: path.join(__dirname, './dist'),
