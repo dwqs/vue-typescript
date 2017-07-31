@@ -72,12 +72,6 @@ module.exports = {
         }
     },
 
-    {{#jquery}}
-    externals: {
-       jquery: 'jQuery'
-    },
-    {{/jquery}}
-
     resolveLoader: {
         modules: [path.join(__dirname, '../node_modules')]
     },
@@ -87,14 +81,6 @@ module.exports = {
     },
 
     plugins:[
-
-        {{#jquery}}
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery",
-            "window.jQuery": "jquery"
-        }),
-        {{/jquery}}
 
         new webpack.DefinePlugin({
             'window.PREFIX': JSON.stringify(apiPrefix)
