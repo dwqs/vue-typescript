@@ -25,6 +25,7 @@
     "mobx": "^3.2.1",
     "vue-mobx": "^1.2.1",
     {{/if_eq}}
+    "axios": "^0.16.2",
     "async-await-error-handling": "^0.5.2"
   },
   "devDependencies": {
