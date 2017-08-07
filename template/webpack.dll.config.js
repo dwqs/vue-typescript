@@ -17,7 +17,7 @@ let vendors = [
 module.exports = {
     entry: {
         vendor: vendors.concat(
-            'vue', 'vue-class-component', 'vue-router', 'babel-polyfill', 
+            'vue', 'vue-class-component', 'vue-router', 
             'async-await-error-handling', 'axios'
         )
     },
