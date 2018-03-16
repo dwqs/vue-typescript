@@ -1,21 +1,19 @@
-'use strict';
+const path = require('path');
 
-let path = require('path');
-
-module.exports =  {
-    dev:{
-        env: 'development',
+module.exports = {
+    development: {
         assetsRoot: path.resolve(__dirname, '../dist'),
         assetsPublicPath: '/',
+        assetsSubDirectory: 'static',
         contentBase: path.resolve(__dirname, '../dist'),
         port: {{port}},
         prefix: '{{prefix}}'
     },
-    build:{
-        env: 'production',
+    production: {
         assetsRoot: path.resolve(__dirname, '../dist'),
         assetsPublicPath: '/',
-        contentBase: path.resolve(__dirname, '../dist'),
-        prefix: '{{prefix}}'
+        assetsSubDirectory: 'static',
+        prefix: '{{prefix}}',
+        productionSourceMap: true
     }
-}
+};
