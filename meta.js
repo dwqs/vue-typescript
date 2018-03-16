@@ -4,7 +4,7 @@ module.exports = {
           "type"    : "string",
           "required": false,
           "message" : "Project name",
-          "default" : "vue-startup"
+          "default" : "vue-typescript"
       },
       "author": {
           "type"   : "string",
@@ -42,10 +42,6 @@ module.exports = {
           "required": false,
           "message" : "client port",
           "default" : 3000
-      },
-      "imageminifying": {
-          "type": "confirm",
-          "message": "Need image minifying in production?"
       }
   },
   "filters": {
