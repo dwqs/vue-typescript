@@ -17,8 +17,7 @@
 <script lang="ts">
     import './index.less';
 
-    import Vue from 'vue';
-    import Component from 'vue-class-component';
+    import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
     
     import Hello from '@components/hello/index.vue';
     {{#if_eq state 'vuex'}}
@@ -36,22 +35,12 @@
 
         components: {
             Hello
-        },
-
-        props: {
-            testProps: {
-                type: String,
-                default: 'TypeScript 2'
-            }
-        },
-
-        watch: {
-            curTime (oldVal, newVal) {
-                console.log('curTime changed: ', oldVal, newVal);
-            }
         }
     })
     export default class App extends Vue {
+        @Prop({ default: 'TypeScript 2' }) 
+        testProps: string;
+        
         // data
         title: string = `Vuejs 2 + Webpack 3 + ${this.testProps}`;
 
@@ -62,6 +51,11 @@
 
         get computedInfo () {
             return this.computedTitle + ' info';
+        }
+
+        @Watch('curTime')
+        onTimeChanged(val: number, oldVal: number) {
+            console.log('curTime changed: ', oldVal, val);
         }
 
         // hooks
@@ -76,20 +70,23 @@
     }
     {{/if_eq}}
     {{#if_eq state 'mobx'}}
-    import {connect} from 'vue-mobx';
     import timeModel from '@src/mobx/time';
 
-    const indexComponent = {
+    export default {
         data () {
             return {
                 title: 'vuejs 2 + webpack 3'
             };
         },
+
+        fromMobx: {
+            timeModel
+        },
+
         components: {
             Hello
         }
     }
-    export default connect({timeModel})(indexComponent)
     {{/if_eq}}
 </script>
 

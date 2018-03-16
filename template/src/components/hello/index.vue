@@ -8,8 +8,7 @@
 <script lang="ts">
     import './hello.less';
 
-    import Vue from 'vue';
-    import Component from 'vue-class-component';
+    import { Vue, Component } from 'vue-property-decorator';
 
     @Component
     export default class Hello extends Vue {

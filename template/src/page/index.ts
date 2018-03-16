@@ -1,5 +1,7 @@
+import 'normalize.css';
+import 'babel-polyfill';
+
 import './hooks';
-import './reset.css';
 
 import Vue from 'vue';
 import Router from 'vue-router';
@@ -8,13 +10,13 @@ import { sync } from 'vuex-router-sync';
 {{/if_eq}}
 {{#if_eq state 'mobx'}}
 import VueMobx from 'vue-mobx';
-import {toJS, useStrict, isObservable} from 'mobx';
+import { observable, isObservable, toJS } from 'mobx';
 
 Vue.use(VueMobx, {
     toJS,
-    isObservable
+    isObservable,
+    observable: observable
 });
-useStrict(true);
 {{/if_eq}}
 
 const env = process.env.NODE_ENV || 'development';
