@@ -1,6 +1,6 @@
 # vue-typescript
 
-A template with webpack 3 + vuejs 2 + typescript 2 setup for projects startup.
+A template with webpack 4 + vuejs 2 + typescript 2 setup for projects startup.
 
 ## Install/安装
 

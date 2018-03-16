@@ -7,22 +7,24 @@
  # 安装依赖
  npm i
 
- # 生成 dll 文件, 用于缩短开发时的 rebuild 时间
- npm run dll
-
  # 启动脚本
  npm run dev
 ```
 
 浏览器访问 `localhost:${port}${publicPath}`, 默认是 `localhost:3000/`.
 
+## 代码提交规范
+脚手架git提交信息采用 [Angular规范](https://github.com/conventional-changelog/conventional-changelog/blob/v0.5.3/conventions/angular.md) [中文参考](http://www.jianshu.com/p/c7e40dab5b05)
+
+使用 [commitlint](https://github.com/marionebl/commitlint) + [husky](https://github.com/typicode/husky) 进行commit检查
+
+使用 [commitizen](https://github.com/commitizen/cz-cli) 生成提交信息(需要全局安装)
+
 ## 其它脚本
 
-* `npm run ilint`: tslint & eslint 检查, 会根据 `.eslintrc.json` 的配置去检查 `src` 目录下的 `.vue` 和 `.js` 文件. 项目中加入了 `pre-push hooks`, 每次 `push` 之前都会自动运行该脚本. 可以参考 [doc](http://eslint.org/docs/rules/) 自定义配置.
-* `npm run fix`: tslint & eslint 自动修复
-* `npm run build:stag`: 开发环境 build
-* `npm run build:preview`:预发环境 build
-* `npm run build:prod`: 生产环境 build
+* `npm run ilint`: eslint 检查, 会根据 .eslintrc 的配置去检查 `src` 目录下的 `.vue` 和 `.js` 文件. 项目中加入了 `pre-push hooks`, 每次 `push` 之前都会自动运行该脚本. 可以参考 [doc](http://eslint.org/docs/rules/) 自定义配置.
+* `npm run fix`: eslint 自动修复
+* `npm run build`: 生产环境 build
 
 ## 目录结构
 
@@ -86,5 +88,3 @@ import Hello from '../../../../components/Hello/index.vue'; # 引入组件
 # Bad
 <img src = "../../../../assets/logo.png">  # 如果引用层级不深(不超过两层), 可以采用相对路径, 对于小图片有利于 base64 优化
 ```
-
-* 脚手架默认配置了 dll/happypack 构建优化和组件按需加载优化
