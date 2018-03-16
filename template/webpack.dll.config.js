@@ -1,37 +1,67 @@
-'use strict';
-
 const path = require('path');
 const webpack = require('webpack');
+const HappyPack = require('happypack');   
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-{{#if_eq state 'vuex'}}
-let vendors = [
-    'vuex', 'vuex-router-sync'
-];
-{{/if_eq}}
-{{#if_eq state 'mobx'}}
-let vendors = [
-    'mobx', 'vue-mobx'
-];
-{{/if_eq}}
+const getHappyPackConfig = require('./build/happypack');
+const pkg = require('./package.json');
+let dependencies = Object.keys(pkg['dependencies']);
 
-module.exports = {
+dependencies = dependencies.map(item => {
+    if (item === 'vue') {
+        return 'vue/dist/vue.esm.js';
+    }
+    if (item === 'normalize.css') {
+        return 0;
+    }
+    return item;
+}).filter(item => !!item);
+
+const env = process.env.NODE_ENV || 'development';
+
+const dllConfig = {
+    context: process.cwd(),
+    mode: env,
     entry: {
-        vendor: vendors.concat(
-            'vue', 'vue-class-component', 'vue-router', 
-            'async-await-error-handling', 'axios'
-        )
+        vendor: dependencies
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js/,
+                loader: 'happypack/loader?id=js'
+            }
+        ]
     },
     output: {
-        path: path.join(__dirname, './dist'),
+        path: path.join(__dirname, 'dist'),
         filename: '[name].dll.js',
-        //定义输出：window.${output.library}
+        // 定义输出：window.${output.library}
         library: '[name]_library'
     },
     plugins: [
         new webpack.DllPlugin({
-          path: path.join(__dirname, './dist', '[name]-manifest.json'),
-          // 和 output.library 一样即可
-          name: '[name]_library'
-      })
+            path: path.join(__dirname, 'dist', '[name]-manifest.json'),
+            // 和 output.library 一样即可
+            name: '[name]_library'
+        }),
+
+        new HappyPack(getHappyPackConfig({
+            id: 'js',
+            loaders: [{
+                path: 'babel-loader',
+                query: {
+                    cacheDirectory: true
+                }
+            }] 
+        })),
+
+        new UglifyJsPlugin({
+            parallel: true,
+            cache: true,
+            sourceMap: false
+        })
     ]
-}
+};
+
+module.exports = dllConfig;
