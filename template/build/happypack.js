@@ -1,14 +1,10 @@
-'use strict';
+const HappyPack = require('happypack');
+const happyThreadPool = HappyPack.ThreadPool({ size: 6 });
 
-let HappyPack = require('happypack');
-let os = require('os');
-let happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
-
-module.exports = function (opts){
+module.exports = function (opts) {
     return {
         id: opts.id,
         threadPool: happyThreadPool,
-        verbose: true,
         loaders: opts.loaders,
     }
-}
+};

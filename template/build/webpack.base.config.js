@@ -1,30 +1,30 @@
-'use strict';
-
-let path = require('path');
-let webpack = require('webpack');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
-let CopyWebpackPlugin = require('copy-webpack-plugin');
-let HappyPack = require('happypack'); 
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const HappyPack = require('happypack');
 let ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-let getHappyPackConfig = require('./happypack');
-
-let config = require('../config');
+const getHappyPackConfig = require('./happypack');
+const config = require('../config');
+const utils = require('./utils');
 
 const env = process.env.NODE_ENV || 'development';
-
-const apiPrefix = env === 'development' ? config.dev.prefix : config.build.prefix;
+const apiPrefix = env === 'development' ? config[env].prefix : config[env].prefix;
 
 console.log('---------env------:', env, '------apiPrefix-------:', apiPrefix);
 
 module.exports = {
-    context: path.resolve(__dirname, "../src"),
+    mode: env,
+    context: utils.resolve('src'),
     module: {
         noParse: [/static|assets/],
         rules: [
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
+                type: 'javascript/auto',
                 use: [{
                     loader: 'ts-loader',
                     options: {
@@ -35,27 +35,28 @@ module.exports = {
             },
             {
                 test: /\.vue$/,
-                use: [{
-                    loader: 'happypack/loader?id=vue'
-                }]
+                type: 'javascript/auto',
+                loader: 'happypack/loader?id=vue'
             },
             {
-                test: /\.(png|jpg|gif|jpeg)$/,
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                type: 'javascript/auto',
                 use: [{
                     loader: 'url-loader',
                     options: {
                         limit: 8192,
-                        name: '[name].[ext]?[hash:8]'
+                        name: utils.assetsPath('images/[name].[ext]')
                     }
                 }]
             },
             {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                type: 'javascript/auto',
                 use: [{
-                    loader: 'file-loader',
+                    loader: 'url-loader',
                     options: {
-                        limit: 8192,
-                        name: '[name].[ext]?[hash:8]'
+                        limit: 10000,
+                        name: utils.assetsPath('fonts/[name].[ext]')
                     }
                 }]
             }
@@ -64,47 +65,54 @@ module.exports = {
 
     resolve:{
         extensions:[".ts",".tsx", ".js"],
-        modules: [path.join(__dirname, '../node_modules')],
+        modules: [utils.resolve('node_modules')],
         alias:{
-            '@src': path.resolve(__dirname, '../src'),
-            '@components': path.resolve(__dirname, '../src/components'),
-            'vue$': 'vue/dist/vue.js'
+            '@src': utils.resolve('src'),
+            '@components': utils.resolve('src/components'),
+            'vue$': 'vue/dist/vue.esm.js'
         }
     },
 
     resolveLoader: {
-        modules: [path.join(__dirname, '../node_modules')]
+        modules: [utils.resolve('node_modules')]
     },
 
     performance: {
         hints: false
     },
 
-    externals: {
-        'babel-polyfill': 'window'
+    stats: {
+        children: false
     },
 
     plugins:[
-
-        new webpack.DefinePlugin({
-            'window.PREFIX': JSON.stringify(apiPrefix)
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            // 引入 dll 生成的 manifest 文件
+            manifest: utils.resolve('dist/vendor-manifest.json')
         }),
-
-        //copy assets
-        new CopyWebpackPlugin([
-            {context: '../src', from: 'assets/**/*', to: path.resolve(__dirname, '../dist'), force: true}
-        ]),
 
         new HappyPack(getHappyPackConfig({
             id: 'vue',
-            loaders: [{
-                path: 'vue-loader',
-                query: {
-                    // https://github.com/vuejs/vue-loader/issues/863
-                    esModule: true
-                }
-            }]
+            loaders: ['vue-loader']
         })),
+
+        new CopyWebpackPlugin([
+            { 
+                context: '..', 
+                from: 'static/**/*', 
+                to: utils.resolve('dist'), 
+                force: true,
+                ignore: ['.*']
+            }, 
+            {
+                context: '../src',
+                from: 'assets/**/*',
+                to: utils.resolve('dist'),
+                force: true,
+                ignore: ['.*']
+            }
+        ]),
 
         // https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
@@ -121,6 +129,8 @@ module.exports = {
 
         new ForkTsCheckerWebpackPlugin({
             tsconfig: '../tsconfig.json'
-        })
+        }),
+
+        new ProgressBarPlugin()
     ]
 };
