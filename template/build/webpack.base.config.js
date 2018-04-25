@@ -73,6 +73,10 @@ module.exports = {
         }
     },
 
+    externals: {
+        'es6-promise': 'window.ES6Promise'
+    },
+
     resolveLoader: {
         modules: [utils.resolve('node_modules')]
     },
@@ -86,12 +90,6 @@ module.exports = {
     },
 
     plugins:[
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            // 引入 dll 生成的 manifest 文件
-            manifest: utils.resolve('dist/vendor-manifest.json')
-        }),
-
         new HappyPack(getHappyPackConfig({
             id: 'vue',
             loaders: ['vue-loader']

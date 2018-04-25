@@ -33,10 +33,14 @@ module.exports = merge(baseWebpackConfig, {
         filename: '[name].js',
         path: config[env].assetsRoot,
         publicPath: config[env].assetsPublicPath,
-        sourceMapFilename: '[file].map',
         chunkFilename: '[name].js'
     },
     plugins: [
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            // 引入 dll 生成的 manifest 文件
+            manifest: utils.resolve('dist/vendor-manifest.json')
+        }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
 
